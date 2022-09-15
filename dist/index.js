@@ -14,6 +14,9 @@ try {
   console.log("Owner " + owner);
   const repo = github.context.repo.repo
   console.log("Repo " + repo);
+  console.log("workflow_id " + core.getInput("workflow_id"));
+  console.log("branch " + core.getInput("branch"));
+
   octokit.actions
     .listWorkflowRuns({
       owner,
