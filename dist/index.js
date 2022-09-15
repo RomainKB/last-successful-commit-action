@@ -11,7 +11,9 @@ const github = __webpack_require__(438);
 try {
   const octokit = github.getOctokit(core.getInput("github_token"));
   const owner = github.context.repo.owner
+  console.log("Owner " + owner);
   const repo = github.context.repo.repo
+  console.log("Repo " + repo);
   octokit.actions
     .listWorkflowRuns({
       owner,
@@ -21,10 +23,11 @@ try {
       branch: core.getInput("branch"),
     })
     .then((res) => {
+      console.log("Length " + res.data.workflow_runs.length);
       const lastSuccessCommitHash =
         res.data.workflow_runs.length > 0
           ? res.data.workflow_runs[0].head_commit.id
-          : "test";
+          : "";
       core.setOutput("commit_hash", lastSuccessCommitHash);
     })
     .catch((e) => {
