@@ -9,7 +9,7 @@ try {
       owner,
       repo,
       workflow_id: core.getInput("workflow_id"),
-      status: "success",
+      status: "completed",
       branch: core.getInput("branch"),
     })
     .then((res) => {
